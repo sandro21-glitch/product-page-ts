@@ -13,6 +13,9 @@ export default {
         White: "hsl(0, 0%, 100%)",
         Black: "hsl(0, 0%, 0%)", // (with 75% opacity for lightbox background)
       },
+      boxShadow: {
+        ShadowBottom: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+      },
     },
   },
   plugins: [],
