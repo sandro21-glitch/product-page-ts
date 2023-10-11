@@ -5,12 +5,7 @@
 
 :root {
   /* --max-width: 23.438rem; */
-  --max-width:30rem;
-}
-@media (min-width: 768px) {
-  :root {
-    --max-width: 90rem;
-  }
+  --max-width: 70rem;
 }
 
 *,
