@@ -7,14 +7,20 @@ import Sidebar from "./Sidebar";
 import Overlay from "./Overlay";
 import { navItems } from "../constants/navList";
 import CartPopup from "./CartPopup";
-const Navbar = () => {
+import CartAmount from "./CartAmount";
+
+type NavbarTypes = {
+  cartItem: { name: string; amount: number; price: number };
+  handleRemoveItem: () => void;
+};
+const Navbar = ({ cartItem, handleRemoveItem }: NavbarTypes) => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [openCart, setOpenCart] = useState<boolean>(false);
   return (
     <header className="w-full relative">
-      <nav className="section-center flex relative items-center justify-between border-b border-b-Grayishblue">
+      <nav className="section-center flex relative items-center justify-between border-b border-b-Grayishblue p-4 md:p-0 md:py-4">
         {/* left side */}
-        <div className="flex gap-5 md:gap-14 items-center  py-5">
+        <div className="flex gap-5 md:gap-14 items-center ">
           <div className="block md:hidden">
             <Hamburger toggled={isOpen} toggle={setOpen} size={20} />
           </div>
@@ -27,7 +33,7 @@ const Navbar = () => {
                   className="cursor-pointer group relative text-Darkgrayishblue hover:text-Verydarkblue transition-colors ease-in duration-150
                   after:w-0 after:hover:w-full after:transition-all
                   after:ease-in dura after:h-[3px] after:bg-NormalOrange after:absolute
-                  after:left-0 after:-bottom-full after:top-[35px]"
+                  after:left-0 after:-bottom-full after:top-[43px]"
                 >
                   {item.text}
                 </li>
@@ -38,19 +44,26 @@ const Navbar = () => {
         {/* right side */}
         <div>
           <ul className="flex items-center gap-10">
-            <li className="cursor-pointer group">
+            <li className="cursor-pointer group relative">
               <img
                 src={cart}
                 alt="cart"
                 onClick={() => setOpenCart(!openCart)}
               />
-              {openCart ? <CartPopup openCart={openCart} /> : null}
+              <CartAmount amount={cartItem.amount} />
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer border-2 border-transparent hover:border-NormalOrange rounded-full transition-all ease-in duration-150">
               <img src={avatar} alt="avatar" className="max-w-[2.5rem]" />
             </li>
           </ul>
         </div>
+      {openCart ? (
+        <CartPopup
+          openCart={openCart}
+          cartItem={cartItem}
+          handleRemoveItem={handleRemoveItem}
+        />
+      ) : null}
       </nav>
       <Sidebar isOpen={isOpen} setOpen={setOpen} />
       <Overlay isOpen={isOpen} />
