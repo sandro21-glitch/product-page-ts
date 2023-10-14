@@ -7,7 +7,7 @@ type SidebarProps = {
 const Sidebar = ({ isOpen, setOpen }: SidebarProps) => {
   return (
     <aside
-      className={`absolute left-0 top-0 ${
+      className={`fixed left-0 top-0 ${
         isOpen ? "translate-x-0 " : "translate-x-[-200%]"
       } w-screen h-screen
        transition-all ease-linear duration-300 flex md:hidden items-center z-[99999]`}
