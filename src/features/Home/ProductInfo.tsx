@@ -1,6 +1,16 @@
 import PriceControl from "./PriceControl";
-
-const ProductInfo = () => {
+type AmountType = {
+  setAmount: (amount: number) => void;
+  amount: number;
+  price: number;
+  handleAddCart: (price: number, amount: number) => void;
+};
+const ProductInfo = ({
+  setAmount,
+  amount,
+  price,
+  handleAddCart,
+}: AmountType) => {
   return (
     <div className="max-w-[35rem] py-10">
       <div className="">
@@ -14,7 +24,12 @@ const ProductInfo = () => {
           the weather can offer.
         </p>
       </div>
-      <PriceControl />
+      <PriceControl
+        handleAddCart={handleAddCart}
+        setAmount={setAmount}
+        amount={amount}
+        price={price}
+      />
     </div>
   );
 };
