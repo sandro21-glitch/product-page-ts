@@ -1,8 +1,16 @@
 import cartImage from "../../assets/image-product-1.jpg";
 import removeItem from "../../assets/icon-delete.svg";
-type Props = {};
 
-const CartItems = () => {
+type CartItemType = {
+  cartItem: {
+    name: string;
+    amount: number;
+    price: number;
+  };
+  handleRemoveItem: () => void;
+};
+
+const CartItems = ({ cartItem, handleRemoveItem }: CartItemType) => {
   return (
     <div className="p-5">
       <div className="flex justify-between">
@@ -13,13 +21,14 @@ const CartItems = () => {
             className="max-w-[4rem] h-auto"
           />
           <div className="flex flex-col justify-evenly">
-            <h6>Fall Limited Edition Sneakers</h6>
+            <h6>{cartItem.name}</h6>
             <p>
-              $125.00 x 3 <span className="font-bold">$375.00</span>
+              $125.00 x {cartItem.amount}{" "}
+              <span className="font-bold ml-2">${cartItem.price}.00</span>
             </p>
           </div>
         </div>
-        <button>
+        <button onClick={handleRemoveItem}>
           <img src={removeItem} alt="delete item" />
         </button>
       </div>
